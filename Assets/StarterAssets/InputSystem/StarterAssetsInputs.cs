@@ -15,6 +15,8 @@ namespace StarterAssets
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
+		public bool autoSprint;
+		public float autoSprintInputDistance = 2.0f;
 
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
@@ -49,6 +51,12 @@ namespace StarterAssets
 		public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
+
+			// 自动跑步
+			if (autoSprint && autoSprintInputDistance > 0)
+			{
+				sprint = move.magnitude >= autoSprintInputDistance;
+			}
 		} 
 
 		public void LookInput(Vector2 newLookDirection)
